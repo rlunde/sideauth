@@ -1,0 +1,3 @@
+[x] finish going through https://golang.org/doc/code.html
+[ ] replace gin with standard net/http and gorilla
+[ ] refactor stuff brought in from funtodone into apis from api.txt
