@@ -1,3 +1,9 @@
 [x] finish going through https://golang.org/doc/code.html
-[ ] replace gin with standard net/http and gorilla
+[x] replace gin with standard net/http and gorilla
 [ ] refactor stuff brought in from funtodone into apis from api.txt
+
+[ ] sideauth should keep track of which sessions are valid by UUID
+[ ] the caller should hash the password with salt sideauth never sees
+[ ] a session should be tied to an account and email
+[ ] read up on how OAuth2 works
+[ ] session data should be managed by sideauth
