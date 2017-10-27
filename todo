@@ -1,6 +1,11 @@
 [x] finish going through https://golang.org/doc/code.html
 [x] replace gin with standard net/http and gorilla
-[ ] refactor stuff brought in from funtodone into apis from api.txt
+[ ] refactor stuff brought in from funtodone into apis from api.txt -- try doing them in this order:
+  [ ] POST /account
+  [ ] GET /account/${base64_name}/pw/${hash}
+  [ ] GET /account/${base64_name}
+  [ ] POST /sessions
+  [ ] PUT /session/${id}
 
 [ ] sideauth should keep track of which sessions are valid by UUID
 [ ] the caller should hash the password with salt sideauth never sees

@@ -4,34 +4,15 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/badoux/checkmail"
-	"github.com/gorilla/mux"
 )
 
 func ping(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "pong")
 }
 
-/*RunService runs the main service endpoints
- */
-func RunService() {
-	// next 3 lines show use of Gorialla mux
-	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/ping", ping)
-
-	router.HandleFunc("/register", RegisterAccount).Methods("POST")
-	/* session related operations: login creates a session, logout destroys one */
-	router.HandleFunc("/login", LoginWithAccount).Methods("POST")
-	router.HandleFunc("/logout", Logout).Methods("POST")
-
-	/* all other operations require a valid session, and validation happens as a first step */
-	router.HandleFunc("/", indexPage).Methods("GET")
-	log.Fatal(http.ListenAndServe(":10000", router))
-
-}
 func indexPage(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome to sideauth")
 	fmt.Println("Endpoint Hit: indexPage")
@@ -43,9 +24,9 @@ func RegisterAccount(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
-	} else {
-		fmt.Printf("RegisterAccount called with username %s, email %s, password %s\n", username, email, password)
 	}
+	fmt.Printf("RegisterAccount called with username %s, email %s, password %s\n", username, email, password)
+
 	//TODO: validate that account doesn't already exist
 	//TODO: try to create login and save it in database
 	//TODO: create a session cookie
@@ -60,9 +41,9 @@ func LoginWithAccount(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
-	} else {
-		fmt.Printf("LoginWithAccount called with username %s, password %s\n", username, password)
 	}
+	fmt.Printf("LoginWithAccount called with username %s, password %s\n", username, password)
+
 	//TODO: create a session cookie
 
 	mgr := GetMgr()
