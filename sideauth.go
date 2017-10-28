@@ -17,8 +17,9 @@ func RunService() {
 	// next 3 lines show use of Gorialla mux
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/ping", ping)
+	router.HandleFunc("/accounts", RegisterAccount).Methods("POST")
 
-	router.HandleFunc("/register", RegisterAccount).Methods("POST")
+	//router.HandleFunc("/register", RegisterAccount).Methods("POST")
 	/* session related operations: login creates a session, logout destroys one */
 	router.HandleFunc("/login", LoginWithAccount).Methods("POST")
 	router.HandleFunc("/logout", Logout).Methods("POST")

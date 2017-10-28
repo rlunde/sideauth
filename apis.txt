@@ -1,9 +1,9 @@
 
-GET /account/${base64_name}/pw/${hash}
+GET /accounts/${base64_name}/pw/${hash}
   - if the account exists with that password, return the account data
-GET /account/${base64_name}
+GET /accounts/${base64_name}
   - if any account exists with that name, return true
-GET /session/${id}
+GET /sessions/${id}
   - if a valid (unexpired) session exists with that id (a UUID), return it
 GET /sessions/account/${base64_name}/pw/${hash}
   - return any current session for the account and password
@@ -13,9 +13,9 @@ DELETE /sessions/account/${base64_name}/pw/${hash}
   - delete any session(s) for that account with that password
 POST /sessions
   - given an account and password (hash) create a new session
-POST /account
+POST /accounts
   - given an account and password (hash) create the account if it doesn't exist
-PUT /account/${base64_name}/pw/${hash}
+PUT /accounts/${base64_name}/pw/${hash}
   - update the account indicated by the account and password
-PUT /session/${id}
+PUT /sessions/${id}
   - update the session indicated by the id
