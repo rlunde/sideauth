@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"net/http"
 
@@ -20,12 +19,12 @@ func indexPage(w http.ResponseWriter, r *http.Request) {
 
 //RegisterAccount -- create a new login
 func RegisterAccount(w http.ResponseWriter, r *http.Request) {
-	username, email, password, err := getRegistrationData(w, r)
+	account, email, pwhash, err := getRegistrationData(w, r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	fmt.Printf("RegisterAccount called with username %s, email %s, password %s\n", username, email, password)
+	fmt.Printf("RegisterAccount called with account %s, email %s, pwhash %s\n", account, email, pwhash)
 
 	//TODO: validate that account doesn't already exist
 	//TODO: try to create login and save it in database
@@ -37,12 +36,12 @@ func RegisterAccount(w http.ResponseWriter, r *http.Request) {
 
 //LoginWithAccount -- create a new session, or return an error
 func LoginWithAccount(w http.ResponseWriter, r *http.Request) {
-	username, password, err := getLoginData(w, r)
+	account, pwhash, err := getLoginData(w, r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	fmt.Printf("LoginWithAccount called with username %s, password %s\n", username, password)
+	fmt.Printf("LoginWithAccount called with account %s, pwhash %s\n", account, pwhash)
 
 	//TODO: create a session cookie
 
@@ -53,8 +52,8 @@ func LoginWithAccount(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	//TODO: return success or error message
-	//TODO: verify password is correct
-	sess.Set("username", username)
+	//TODO: verify pwhash is correct
+	sess.Set("account", account)
 	http.Redirect(w, r, "/", 302)
 	//TODO: on error, display error message and redirect back to login form
 }
@@ -73,16 +72,14 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	//TODO: on error, display error message and redirect back to login form
 }
 
-/*Registration - need to use BindJSON to retrieve from gin, since now posting from React as JSON struct */
+/*Registration - used when registering an account -- we need email for recovery only */
 type Registration struct {
-	Username     string `form:"username" json:"username" binding:"required"`
-	Password     string `form:"password" json:"password" binding:"required"`
-	ConfPassword string `form:"confpassword" json:"confpassword" binding:"required"`
-	Email        string `form:"email" json:"email" binding:"required"`
-	Remember     bool   `form:"remember" json:"remember" `
+	Account string `form:"account" json:"account" binding:"required"`
+	Pwhash  string `form:"pwhash" json:"pwhash" binding:"required"`
+	Email   string `form:"email" json:"email" binding:"required"`
 }
 
-func getRegistrationData(w http.ResponseWriter, r *http.Request) (username, email, password string, err error) {
+func getRegistrationData(w http.ResponseWriter, r *http.Request) (account, email, pwhash string, err error) {
 
 	var reg Registration
 	if r.Body == nil {
@@ -102,23 +99,19 @@ func getRegistrationData(w http.ResponseWriter, r *http.Request) (username, emai
 	// if err != nil {
 	// 	return
 	// }
-	if reg.Password != reg.ConfPassword {
-		err = errors.New("Password and confirm-password do not match")
-	}
-	username = reg.Username
+	account = reg.Account
 	email = reg.Email
-	password = reg.Password
+	pwhash = reg.Pwhash
 	return
 }
 
-/*Login - need to use BindJSON to retrieve from gin, since now posting from React as JSON struct */
+/*Login - used when creating a session (we don't need email for this)  */
 type Login struct {
-	Username string `form:"username" json:"username" binding:"required"`
-	Password string `form:"password" json:"password" binding:"required"`
-	Remember bool   `form:"remember" json:"remember" `
+	Account string `form:"account" json:"account" binding:"required"`
+	Pwhash  string `form:"pwhash" json:"pwhash" binding:"required"`
 }
 
-func getLoginData(w http.ResponseWriter, r *http.Request) (username, password string, err error) {
+func getLoginData(w http.ResponseWriter, r *http.Request) (account, pwhash string, err error) {
 
 	var login Login
 	if r.Body == nil {
@@ -131,9 +124,9 @@ func getLoginData(w http.ResponseWriter, r *http.Request) (username, password st
 		return
 	}
 	if err == nil {
-		fmt.Printf("Got username: %s\n", login.Username)
+		fmt.Printf("Got account: %s\n", login.Account)
 	}
-	username = login.Username
-	password = login.Password
+	account = login.Account
+	pwhash = login.Pwhash
 	return
 }
