@@ -3,12 +3,16 @@
 [ ] refactor stuff brought in from funtodone into apis from api.txt -- try doing them in this order:
   [ ] POST /accounts
   [ ] GET /accounts/${base64_name}/pw/${hash}
-  [ ] GET /accounts/${base64_name}
-  [ ] POST /sessions
-  [ ] PUT /sessions/${id}
+  [ ] GET /accounts/${base64_name} -- check if an account exists
+  [ ] PUT /accounts/${base64_name} -- reset a password, update an email
+  [ ] POST /sessions -- create a session JWT for an account
+  [ ] DELETE /sessions/${base64_name} -- delete a session 
+  [ ] PUT /sessions/${id} -- update a session JWT
+  [ ] GET /sessions/${id} -- validate a session JWT, return contents
 
 [ ] sideauth should keep track of which sessions are valid by UUID
 [ ] the caller should hash the password with salt sideauth never sees
 [ ] a session should be tied to an account and email
 [ ] read up on how OAuth2 works
 [ ] session data should be managed by sideauth
+[ ] use JWT for session data, so we only need to verify account/password, not store session data

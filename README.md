@@ -1,6 +1,15 @@
 # sideauth
 A simple REST microservice to use with any other service to handle common auth tasks
 
+# disclaimer
+DISCLAIMER: I'm not expecting anyone to look at this project, or use it, or contribute to it, for
+quite a while. I'm using it as a learning exercise more than anything else at the moment, with the
+goal of eventually knowing golang better (in this case). I will remove this disclaimer when
+I think the project has reached MVP (minimum viable project) stage. That won't be for a while.
+
+NOTE: I'm not abandoning this project, but I've decided to spend some time really focusing on
+another project (goodwin), which I will then use to try to help make this project.
+
 ## motivation
 I found myself trying to make several different sample services, that I wanted
 to run myself as default webservices, as well as (hopefully) provide a base for
@@ -21,12 +30,6 @@ That way all of the projects I'm working on in whatever language (python, go,
 javascript) could just pass through those operations.
 
 At least that's the theory. We'll see how it goes.
-
-# disclaimer
-DISCLAIMER: I'm not expecting anyone to look at this project, or use it, or contribute to it, for
-quite a while. I'm using it as a learning exercise more than anything else at the moment, with the
-goal of eventually knowing golang better (in this case). I will remove this disclaimer when
-I think the project has reached MVP (minimum viable project) stage. That won't be for a while.
 
 The Madness to my Method:
 

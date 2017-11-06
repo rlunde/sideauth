@@ -6,8 +6,10 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-/*Account -- a unique name correcponding to (for now) a password hash, and that can
-  have sessions.
+/*Account -- a unique name corresponding to an identity, an authorization, and that
+  can have sessions. For now the identity will be managed (such as it is) by email,
+  and the authorization will be done via a password hash. Sideauth will never get the
+  actual password, just the hash from the service.
 */
 type Account struct {
 	Account      string `json:"account"` // this must be unique per Account record
@@ -15,18 +17,6 @@ type Account struct {
 	PasswordHash []byte `json:"-"`
 	//TODO: indicate whether to use password hash or OAuth2, and if OAuth2, which
 	//authorization server
-}
-
-func clear(b []byte) {
-	for i := 0; i < len(b); i++ {
-		b[i] = 0
-	}
-}
-
-//Crypt use bcrypt to create the password hash
-func Crypt(password []byte) ([]byte, error) {
-	defer clear(password)
-	return bcrypt.GenerateFromPassword(password, bcrypt.DefaultCost)
 }
 
 //FindAccountByID - read a Account record from mongodb by its ID

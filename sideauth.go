@@ -17,12 +17,13 @@ func RunService() {
 	// next 3 lines show use of Gorialla mux
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/ping", ping)
+	// best practices generally recommend using only plural nouns for both GET and POST
 	router.HandleFunc("/accounts", RegisterAccount).Methods("POST")
+	router.HandleFunc("/accounts/{account}", UpdateAccount).Methods("PUT")
 
-	//router.HandleFunc("/register", RegisterAccount).Methods("POST")
 	/* session related operations: login creates a session, logout destroys one */
-	router.HandleFunc("/login", LoginWithAccount).Methods("POST")
-	router.HandleFunc("/logout", Logout).Methods("POST")
+	router.HandleFunc("/sessions", LoginWithAccount).Methods("POST")
+	router.HandleFunc("/sessions", Logout).Methods("DELETE")
 
 	/* all other operations require a valid session, and validation happens as a first step */
 	router.HandleFunc("/", indexPage).Methods("GET")
