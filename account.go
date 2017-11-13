@@ -1,7 +1,10 @@
 package main
 
 import (
-	"golang.org/x/crypto/bcrypt"
+	"fmt"
+	"net/http"
+
+	"github.com/gorilla/mux"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -32,17 +35,9 @@ func FindAccountByEmail(c *mgo.Collection, email string) (*Account, error) {
 	err := c.Find(bson.M{"Email": email}).One(&result)
 	return &result, err
 }
-
-//CreateObjectIDStr - return an ID for use in MongoDB for a Account
-func CreateObjectIDStr() string {
-	var id bson.ObjectId
-	id = bson.NewObjectId()
-	idstr := id.Hex()
-	return idstr
-}
-
-//ObjectIDFromIDStr - convert a Account ID into a string that can be used in other places
-func ObjectIDFromIDStr(idStr string) bson.ObjectId {
-	id := bson.ObjectIdHex(idStr)
-	return id
+func UpdateAccount(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "Account: %v\n", vars["account"])
+	//TODO: error handling, find account, get PUT params, update account
 }

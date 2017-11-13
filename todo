@@ -9,6 +9,10 @@
   [ ] DELETE /sessions/${base64_name} -- delete a session 
   [ ] PUT /sessions/${id} -- update a session JWT
   [ ] GET /sessions/${id} -- validate a session JWT, return contents
+[ ] write tests for apis
+  [ ] ping
+  [ ] version
+  
 
 [ ] sideauth should keep track of which sessions are valid by UUID
 [ ] the caller should hash the password with salt sideauth never sees

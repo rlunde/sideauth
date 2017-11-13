@@ -8,10 +8,6 @@ import (
 	"github.com/badoux/checkmail"
 )
 
-func ping(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "pong")
-}
-
 func indexPage(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome to sideauth")
 	fmt.Println("Endpoint Hit: indexPage")
