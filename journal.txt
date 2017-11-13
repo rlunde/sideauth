@@ -1,0 +1,22 @@
+Sunday, November 12, 2017
+
+I think I'll try keeping a little journal of my adventures making this, that may
+help me make a blog entry or two after I get sideauth working (at least minimally).
+
+I'm still trying to clean up the code I extracted into the sideauth project from
+funtodone, and rename things, reorganize things, etc. Fortunately, since this is
+no longer just a bit of another project, I can take my time with this and use TDD,
+and see what kind of best practices I can learn while doing it.
+
+The first thing I'm working on is a POST to create a new account. I want to eventually
+add support for OAuth2, but for now I just want to get regular accounts with passwords
+implemented, with password reset done via email and account creation verified by 
+email. I'll need to add APIs for reset and account verification.
+
+Testing resources:
+https://golang.org/pkg/net/http/httptest/
+https://elithrar.github.io/article/testing-http-handlers-go/
+https://medium.com/@PurdonKyle/unit-testing-golang-http-middleware-c7727ca896ea
+
+I've got some code in session_persist.go that should be helpful in figuring out the
+account stuff for mongo interactions.
