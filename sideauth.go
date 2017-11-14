@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 
@@ -37,9 +38,12 @@ func RunService() {
 }
 func ping(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "pong")
+	w.Header().Set("Content-Type", "application/json")
+	// TODO: report back on the status of the database
+	io.WriteString(w, `{"alive": true}`)
 }
 func version(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "Version: %s\n", VERSION)
+	w.Header().Set("Content-Type", "application/json")
+	fmt.Fprintf(w, "{\"version\": \"%s\"}", VERSION)
 }
