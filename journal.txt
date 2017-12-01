@@ -1,4 +1,6 @@
+==========================================
 Sunday, November 12, 2017
+==========================================
 
 I think I'll try keeping a little journal of my adventures making this, that may
 help me make a blog entry or two after I get sideauth working (at least minimally).
@@ -20,3 +22,15 @@ https://medium.com/@PurdonKyle/unit-testing-golang-http-middleware-c7727ca896ea
 
 I've got some code in session_persist.go that should be helpful in figuring out the
 account stuff for mongo interactions.
+
+==========================================
+Thursday, November 30, 2017
+==========================================
+My little "random project picker" says that tonight I should work on sideauth coding.
+
+(Unfortunately, it's already late and I'm unbelievably tired.)
+
+I think I'll work on a test for POST to /accounts next, which will call CreateAccount
+in the authapi.go file. Actually, I think I'll rename some things, and call that file "account.go"
+and rename some of the stuff inside it.
+
