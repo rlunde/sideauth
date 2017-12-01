@@ -24,7 +24,7 @@ func RunService() {
 	router.HandleFunc("/version", version)
 
 	// best practices generally recommend using only plural nouns for both GET and POST
-	router.HandleFunc("/accounts", RegisterAccount).Methods("POST")
+	router.HandleFunc("/accounts", CreateAccount).Methods("POST")
 	router.HandleFunc("/accounts/{account}", UpdateAccount).Methods("PUT")
 
 	/* session related operations: login creates a session, logout destroys one */
