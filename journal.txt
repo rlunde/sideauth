@@ -34,3 +34,19 @@ I think I'll work on a test for POST to /accounts next, which will call CreateAc
 in the authapi.go file. Actually, I think I'll rename some things, and call that file "account.go"
 and rename some of the stuff inside it.
 
+
+==========================================
+Saturday, December 2, 2017
+==========================================
+
+I think the main problem with this is that it's a hodgepodge of stuff that I copied
+and pasted from github, along with stuff I made for another project, done in a way
+that doesn't really match what anyone needs.
+
+For example, the session stuff might be useful for a website, but it's not really
+something that a web site needs. You need a session ID, and to have session associated
+with a valid account, but all the memory/state for a session can be easily done by
+the website without tying it in to an auth/session service. Or at least, that's what
+it seems to me tonight.
+
+Next steps are to pare this down to the essentials.
