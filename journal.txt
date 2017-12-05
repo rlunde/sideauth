@@ -50,3 +50,45 @@ the website without tying it in to an auth/session service. Or at least, that's 
 it seems to me tonight.
 
 Next steps are to pare this down to the essentials.
+
+
+==========================================
+Monday, December 4, 2017
+==========================================
+
+I suppose a way to add value for anyone using sideauth could be to have "sessions"
+that span devices or browsers. I know some sites keep track of which devices you're
+logged in on, and will ask you if you want to log out of one you're not currently
+using. (This often ties in to some kind of DRM, but it doesn't need to.)
+
+That gets close to developing some sort of single-sign-on though, and seems like
+it could get super hairy. The advantage of putting all your session data in a cookie 
+is that you can scale up your web app without needing a database behind the sessions.
+
+In any case, most people don't need that, at least not right away. What they need 
+is a way to let people create an account, recover a lost password (if they use one),
+and verify the credentials. The web app that uses sideauth can then do whatever 
+it wants on a successful login.
+
+Since I personally get very annoyed when people allow account creation without email
+verification, I won't even have an option to not do that with sideauth.
+
+So the flow will be:
+
+For Account creation
+  1) get an account ID, an email address, and a pwhash (we'll do OAuth2 later)
+  2) verify the account ID doesn't already exist, error if it does 
+  3) create the account, status unverified, send email to the email address
+  4) later, when someone clicks on the link, mark account as verified
+For Login:
+  1) get an account ID and a pwhash 
+  2) if the account doesn't exist, or is unverified, or the pwhash doesn't match, fail the login 
+  3) send back success and some metadata (maybe) like time of last successful login, number of failed logins
+For Password Reset:
+  1) get an account ID 
+  2) send email to associated email
+  3) wait for POST to reset form
+
+There needs to be a set of admin operations too (delete an account, lock an account, change email, ...)
+There needs to be a way to change email if you have the right credentials
+
