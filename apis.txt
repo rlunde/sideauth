@@ -3,16 +3,6 @@ GET /accounts/${base64_name}/pw/${hash}
   - if the account exists with that password, return the account data
 GET /accounts/${base64_name}
   - if any account exists with that name, return true
-GET /sessions/${id}
-  - if a valid (unexpired) session exists with that id (a UUID), return it
-GET /sessions/account/${base64_name}/pw/${hash}
-  - return any current session for the account and password
-DELETE /session/${id}
-  - delete a specific session
-DELETE /sessions/account/${base64_name}/pw/${hash}
-  - delete any session(s) for that account with that password
-POST /sessions
-  - given an account and password (hash) create a new session
 POST /accounts
   - given an account and password (hash) create the account if it doesn't exist
 PUT /accounts/${base64_name}/pw/${hash}
@@ -24,8 +14,6 @@ PUT /accounts/${base64_name}/reset/${code}
   - update the account to reset the password (requires a code sent in email)
   - new password hash is sent in body
   - reset code is sent in body
-PUT /sessions/${id}
-  - update the session indicated by the id
 
 Notes:
 1) verify and reset will require more  complicated caller code than just proxying the 

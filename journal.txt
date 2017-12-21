@@ -92,3 +92,25 @@ For Password Reset:
 There needs to be a set of admin operations too (delete an account, lock an account, change email, ...)
 There needs to be a way to change email if you have the right credentials
 
+==========================================
+Thursday, December 21, 2017
+==========================================
+
+What I didn't explicitly say last time was that I wouldn't be doing sessions,
+or at least I left it a little ambiguous. No sessions.
+
+The pwhash: I don't care what algorithm is used (MD5 or SHA256, etc) or what
+salt is used, since sideauth will only ever see the hashed value. 
+
+Admin operations should (eventually) use a different API key.
+All operations should be authorized (eventually) between the 
+calling service and sideauth, presumably via JWT or something.
+
+I want to eventually support a tenanted solution with a separate
+name space for different tenants for accounts. For the first cut,
+I'll just pass in a default tenant ID.
+
+Sideauth should be deployed as a separate docker container along
+with the service that is using it. It would be best practice to
+use a firewall to prevent API calls from elsewhere, but having
+a unique API key will be enough to get started.
