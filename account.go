@@ -24,13 +24,12 @@ func CreateAccount(w http.ResponseWriter, r *http.Request) {
 
 	//TODO: validate that account doesn't already exist
 	//TODO: try to create login and save it in database
-	//TODO: create a session cookie
 	//TODO: return success or error message
 	//TODO: on success, send email and display a verify email form
 	//TODO: on error, display error message and redirect to register form
 }
 
-//LoginWithAccount -- create a new session, or return an error
+//LoginWithAccount -- verify pwhash for an account, or return an error
 func LoginWithAccount(w http.ResponseWriter, r *http.Request) {
 	account, pwhash, err := getLoginData(w, r)
 	if err != nil {
@@ -39,37 +38,21 @@ func LoginWithAccount(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Printf("LoginWithAccount called with account %s, pwhash %s\n", account, pwhash)
 
-	//TODO: create a session cookie
-
-	mgr := GetMgr()
-	sess, err := mgr.SessionStart(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
+	// mgr := GetMgr()
+	// sess, err := mgr.SessionStart(w, r)
+	// if err != nil {
+	// 	http.Error(w, err.Error(), http.StatusBadRequest)
+	// 	return
+	// }
 	//TODO: return success or error message
 	//TODO: verify pwhash is correct
-	sess.Set("account", account)
+
 	http.Redirect(w, r, "/", 302)
 	//TODO: on error, display error message and redirect back to login form
 }
 
-//Logout -- destroy a session
-func Logout(w http.ResponseWriter, r *http.Request) {
-	mgr := GetMgr()
-	err := mgr.SessionEnd(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	w.Header().Set("Content-Type", "text/plain; charset=utf-8") // normal header
-	w.WriteHeader(http.StatusOK)
-	//TODO: return success or error message
-	//TODO: on error, display error message and redirect back to login form
-}
-
-/*Account -- a unique name corresponding to an identity, an authorization, and that
-  can have sessions. For now the identity will be managed (such as it is) by email,
+/*Account -- a unique name corresponding to an identity, an authorization. For now
+  the identity will be managed (such as it is) by email,
   and the authorization will be done via a password hash. Sideauth will never get the
   actual password, just the hash from the service.
 */
@@ -105,7 +88,7 @@ func getAccountData(w http.ResponseWriter, r *http.Request) (account, email, pwh
 	return
 }
 
-/*Login - used when creating a session (we don't need email for this)  */
+/*Login - used when validating pwhash(we don't need email for this)  */
 type Login struct {
 	Account string `form:"account" json:"account" binding:"required"`
 	Pwhash  string `form:"pwhash" json:"pwhash" binding:"required"`

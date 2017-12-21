@@ -15,16 +15,14 @@ I found myself trying to make several different sample services, that I wanted
 to run myself as default webservices, as well as (hopefully) provide a base for
 other people. The problem was I always got hung up on the first step of that,
 which is just to let users create an account and log in (or use OAuth2) so they
-could save their data across sessions.
+could save their data across sessions. Sessions will (for now) be implemented
+by the caller.
 
 It occurred to me that I could just set up a "side" service with a small set of
 REST APIs that handled all the tedious chores related to that:
  - create an account (if it doesn't already exist)
  - change a password
  - email a link to reset a lost password
- - log in and create a session
- - log out and destroy a session
- - validate a session
 
 That way all of the projects I'm working on in whatever language (python, go,
 javascript) could just pass through those operations.

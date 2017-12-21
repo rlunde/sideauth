@@ -27,12 +27,7 @@ func RunService() {
 	router.HandleFunc("/accounts", CreateAccount).Methods("POST")
 	router.HandleFunc("/accounts/{account}", UpdateAccount).Methods("PUT")
 
-	/* session related operations: login creates a session, logout destroys one */
-	router.HandleFunc("/sessions", LoginWithAccount).Methods("POST")
-	router.HandleFunc("/sessions", Logout).Methods("DELETE")
-
-	/* all other operations require a valid session, and validation happens as a first step */
-	router.HandleFunc("/", indexPage).Methods("GET")
+	// router.HandleFunc("/", indexPage).Methods("GET")
 	log.Fatal(http.ListenAndServe(":10000", router))
 
 }
