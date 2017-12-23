@@ -7,10 +7,10 @@ POST /accounts
   - given an account and password (hash) create the account if it doesn't exist
 PUT /accounts/${base64_name}/pw/${hash}
   - update the account indicated by the account and password
-PUT /accounts/${base64_name}/verify
+PUT /accounts/${base64_name}/verify/${code}
   - update the account to show that email has been verified (requires a code sent in email)
-  - verify code is sent in body
-PUT /accounts/${base64_name}/reset/${code}
+  - verify code is sent in URL so it can be a simple link
+PUT /accounts/${base64_name}/reset
   - update the account to reset the password (requires a code sent in email)
   - new password hash is sent in body
   - reset code is sent in body
@@ -19,3 +19,17 @@ Notes:
 1) verify and reset will require more  complicated caller code than just proxying the 
    URL from the caller domain through to sideauth
 2) I'll probably discover additional requirements when I implement a user of sideauth
+3) To create an account:
+  a) use POST accounts, which succeeds unless the account already exists
+  b) sideauth sends email to user's address: send failure causes failure of POST
+  c) email contains a link to click
+  d) clicked link updates the account to mark it verified
+4) To reset a password
+  a) user clicks on a reset link provided by app server
+  b) app server uses PUT /accounts/${base64_name}/reset
+  c) if account exists, mark it unverified and send an email link to web page done by sideauth
+  d) sideauth verifies link code and account code, and gets a new password (repeat if p/w problem)
+  e) once p/w is reset, mark the account verified again and redirect to login page of app server
+
+I wish I could think of a simple solution that didn't involve handling APIs / pages from the user
+directly. Maybe those pages should be proxied through the app? I need to think about it some more.

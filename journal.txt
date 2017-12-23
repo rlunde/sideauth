@@ -114,3 +114,12 @@ Sideauth should be deployed as a separate docker container along
 with the service that is using it. It would be best practice to
 use a firewall to prevent API calls from elsewhere, but having
 a unique API key will be enough to get started.
+
+==========================================
+Friday, December 22, 2017
+==========================================
+
+I have a cold and fever today, so I don't trust myself to try
+anything but documentation. I updated the apis.txt file will more
+details about how account verification and password reset might
+work. I need to think about that some more, though.
