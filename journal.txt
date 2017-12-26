@@ -123,3 +123,16 @@ I have a cold and fever today, so I don't trust myself to try
 anything but documentation. I updated the apis.txt file will more
 details about how account verification and password reset might
 work. I need to think about that some more, though.
+
+==========================================
+Monday, December 25, 2017
+==========================================
+
+Let's do some TDD today!
+
+I changed "ping" to status and added return values for:
+  a) database status
+  b) uptime
+  c) duration of the status API call
+  d) service version
+

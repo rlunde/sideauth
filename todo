@@ -6,8 +6,8 @@
   [ ] GET /accounts/${base64_name} -- check if an account exists
   [ ] PUT /accounts/${base64_name} -- reset a password, update an email
 [ ] write tests for apis
-  [ ] ping
-  [ ] version
+  [ ] /sideauth/v1/status
+
   
 
 [ ] the caller should hash the password with salt sideauth never sees
