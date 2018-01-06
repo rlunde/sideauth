@@ -136,3 +136,9 @@ I changed "ping" to status and added return values for:
   c) duration of the status API call
   d) service version
 
+==========================================
+Friday, January 5, 2017
+==========================================
+
+Wanted to do a little more testing today, but ran out of 
+time. Just made a stub for account testing.
