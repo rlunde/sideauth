@@ -142,3 +142,40 @@ Friday, January 5, 2017
 
 Wanted to do a little more testing today, but ran out of 
 time. Just made a stub for account testing.
+
+==========================================
+Tuesday, January 16, 2017
+==========================================
+
+OK! Let's go. I have 20 entire minutes!
+
+Account creation. Let's pseudocode:
+
+1) handle an API call, and get the values
+  a) account name
+  b) pwhash
+  c) email address
+2) verify that the account doesn't already exist
+  a) look up the account in the database
+3) verify that the email address is real and belongs to the end user
+
+There are verification steps for each of the above as well:
+1) verify that the account name is non-empty and UTF-8
+  a) look up account, if it exists already return an error
+2) verify that the pwhash is non-empty and UTF-8
+  a) return an error if it is not
+3) verify that the email address looks like an email address
+  a) return an error if it doesn't
+4) send email to the email address with a link to click
+  a) when link is clicked, mark the email address as verified
+  b) until it's verified, queries for the account should say it's unverified
+
+To look up account:
+1) open a connection to the database when the service is started
+2) verify that the account is UTF-8
+3) query the database for the account
+4) if found, return an error
+5) periodically clean the database of unused accounts
+6) prevent accounts that look like hacks (sql injection, cross site scripting)
+7) log the query
+
