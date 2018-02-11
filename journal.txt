@@ -137,14 +137,14 @@ I changed "ping" to status and added return values for:
   d) service version
 
 ==========================================
-Friday, January 5, 2017
+Friday, January 5, 2018
 ==========================================
 
 Wanted to do a little more testing today, but ran out of 
 time. Just made a stub for account testing.
 
 ==========================================
-Tuesday, January 16, 2017
+Tuesday, January 16, 2018
 ==========================================
 
 OK! Let's go. I have 20 entire minutes!
@@ -178,4 +178,36 @@ To look up account:
 5) periodically clean the database of unused accounts
 6) prevent accounts that look like hacks (sql injection, cross site scripting)
 7) log the query
+
+==========================================
+Wednesday, January 17, 2018
+==========================================
+
+Started adding a test for Account creation.
+Still a lot more to do in it, though.
+
+==========================================
+Saturday, February 10, 2018
+==========================================
+
+Tonight's randomly selected task is design of sideauth.
+
+Let's just focus on overall service stuff.
+1) run the service
+2) log a fatal error if the port is unavailable
+3) create rest endpoints
+
+I started by just clicking the "debug test" link
+on account_test.go in vscode, and got:
+could not launch process: dial tcp :53450: getsockopt: connection refused
+
+Following a rumor on the vscode site, I'm trying to upgrade delve:
+
+brew unlink delve && brew install go-delve/delve/delve --HEAD
+
+That updated it from Version: 1.0.0-rc.1 to Version: 1.0.0-rc.2
+
+That got past that problem! Now I just need to figure out
+how to pass in an account struct to http.NewRequest
+
 

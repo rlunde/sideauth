@@ -9,7 +9,7 @@ import (
 
 func TestCreateAccount(t *testing.T) {
 	// Create a request to pass to our handler. TODO: figure out what to use instead of nil for 3rd parameter
-	req, err := http.NewRequest("POSTGET", "/accounts", nil)
+	req, err := http.NewRequest("POST", "/accounts", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
