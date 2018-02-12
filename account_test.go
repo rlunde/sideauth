@@ -4,12 +4,20 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 )
 
 func TestCreateAccount(t *testing.T) {
 	// Create a request to pass to our handler. TODO: figure out what to use instead of nil for 3rd parameter
-	req, err := http.NewRequest("POST", "/accounts", nil)
+	expected := Account{
+		Account: "testAccount",
+		Pwhash:  "xyzzy",
+		Email:   "test@example.com",
+	}
+	bytes, err := json.Marshal(expected)
+	r := strings.NewReader(string(bytes))
+	req, err := http.NewRequest("POST", "/accounts", r)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -34,11 +42,7 @@ func TestCreateAccount(t *testing.T) {
 			err.Error(), rr.Body.String())
 	}
 	// Check the response body is what we expect.
-	expected := Account{
-		Account: "testAccount",
-		Pwhash:  "xyzzy",
-		Email:   "test@example.com",
-	}
+
 	if account.Account != expected.Account {
 		t.Errorf("handler returned unexpected account name: got %v want %v",
 			account.Account, expected.Account)
