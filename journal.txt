@@ -210,4 +210,11 @@ That updated it from Version: 1.0.0-rc.1 to Version: 1.0.0-rc.2
 That got past that problem! Now I just need to figure out
 how to pass in an account struct to http.NewRequest
 
+==========================================
+Sunday, February 11, 2018
+==========================================
+
+I figured out how to pass in arguments to the NewRequest POST.
+Now I just need to implement the code being tested!
+
 
