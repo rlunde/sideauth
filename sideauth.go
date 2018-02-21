@@ -11,6 +11,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+//ServiceStartTime -- when did we start?
 var ServiceStartTime time.Time
 
 func main() {
@@ -45,7 +46,7 @@ func RunService() {
 
 }
 
-/*Login - used when validating pwhash(we don't need email for this)  */
+/*Status - TODO: rethink this  */
 type Status struct {
 	Database       string `json:"database"`
 	Uptime         string `json:"uptime" `

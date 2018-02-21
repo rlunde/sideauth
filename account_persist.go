@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -9,10 +10,21 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-//FindAccountByID - read a Account record from mongodb by its ID
-func FindAccountByID(c *mgo.Collection, id bson.ObjectId) (*Account, error) {
+//GetCollection -- get the accounts collection from the localhost database
+func GetCollection() (c *mgo.Collection) {
+	session, err := mgo.Dial("localhost")
+	if err != nil {
+		log.Fatalf("GetCollection error: %s", err) // TODO: figure out what to do
+		return nil
+	}
+	c = session.DB("sideauth").C("accounts")
+	return c
+}
+
+//FindAccountByName - read a Account record from mongodb by its account name
+func FindAccountByName(c *mgo.Collection, name string) (*Account, error) {
 	result := Account{}
-	err := c.Find(bson.M{"_id": id}).One(&result)
+	err := c.Find(bson.M{"Name": name}).One(&result)
 	return &result, err
 }
 
