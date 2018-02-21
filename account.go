@@ -23,6 +23,9 @@ func CreateAccount(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("CreateAccount called with account %s, email %s, pwhash %s\n", account, email, pwhash)
 
 	//TODO: validate that account doesn't already exist
+	c := GetCollection()
+	record, err := FindAccountByName(c, account)
+	fmt.Printf("Record is: %#v", record)
 	//TODO: try to create login and save it in database
 	//TODO: return success or error message
 	//TODO: on success, send email and display a verify email form
