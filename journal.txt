@@ -289,3 +289,102 @@ No, the more I think about it, I think my initial instinct was correct.
 Do the simplest thing I can, to just support password login with recovery,
 and if someone wants to use more sophisticated auth they're better off
 getting a professional-strength solution and doing it right.
+
+==========================================
+Tuesday, February 20, 2018
+==========================================
+
+Today's randomly selected project/focus is: sideauth/test
+
+The problem is, I've forgotten everything I've ever learned about MongoDB,
+including how I installed it on my macbook pro and what the schema looks
+like. I can tell it's running, though, based on ps:
+
+ps aux | grep mongo
+ron                444   0.1  0.1  5078336  21848   ??  S    Thu05PM  16:57.45 /usr/local/opt/mongodb/bin/mongod --config /usr/local/etc/mongod.conf
+
+When I type "mongo" and then "db.help()" I see a bunch of things I can try.
+
+> db.getCollectionNames()
+[ "sessions", "tasks" ]
+
+> db.getName()
+test
+
+> show dbs
+local        0.000GB
+test         0.000GB
+twitterbots  0.000GB
+
+I guess tasks must be from funtodone? Session may be from there, or from sideauth.
+
+Let's make a database with an accounts collection!
+
+> use sideauth
+switched to db sideauth
+> db
+sideauth
+> show dbs
+local        0.000GB
+test         0.000GB
+twitterbots  0.000GB
+> db.account.insert({"name":"test"})
+WriteResult({ "nInserted" : 1 })
+> show dbs
+local        0.000GB
+sideauth     0.000GB
+test         0.000GB
+twitterbots  0.000GB
+>
+
+Neat! Now I have a db named "sideauth" with a collection named "account":
+> db.getCollectionNames()
+[ "account" ]
+
+I should have named it "accounts" I think?
+> db.account.drop()
+true
+> db.getCollectionNames()
+[ ]
+
+Let's drop the databases I don't remember?
+> use twitterbots
+> db.dropDatabase()
+{ "dropped" : "twitterbots", "ok" : 1 }
+> show dbs
+local     0.000GB
+sideauth  0.000GB
+test      0.000GB
+> use test
+switched to db test
+> db.dropDatabase()
+
+> use sideauth
+switched to db sideauth
+> db.getCollectionNames()
+[ "accounts" ]
+
+OK! 
+
+==========================================
+Sunday, February 25, 2018
+==========================================
+
+Oh boy. I don't remember much about what I was doing with this project,
+and it's been about a week.
+
+Also, it's already late.
+
+First thing: look through what I've done lately...
+
+OK. Big points:
+
+1) This is to manage auth, not sessions
+2) So the main thing is to figure out what's in auth, and what's in sessions
+3) Maybe I should start with a sample app? The old "begin with the end in mind" thing?
+
+OK. That sounds good. What's a good app?
+
+How about thingaday? Should be hard, but less hard than most things.
+
+Sheesh. It's all hard.
