@@ -36,6 +36,7 @@ func TestCreateAccount(t *testing.T) {
 			status, http.StatusOK)
 	}
 	var account Account
+
 	err = json.NewDecoder(rr.Body).Decode(&account)
 	if err != nil {
 		t.Errorf("handler returned unexpected body: wanted an Account struct, but got error %s with content  %v",
