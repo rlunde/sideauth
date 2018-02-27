@@ -387,4 +387,19 @@ OK. That sounds good. What's a good app?
 
 How about thingaday? Should be hard, but less hard than most things.
 
-Sheesh. It's all hard.
+==========================================
+Monday, February 26, 2018
+==========================================
+
+First Step: create an account for thingaday
+
+* sideauth will have sample template for account creation
+* thingaday will use customized version
+* post to thingaday REST endpoint will be proxied to sideauth
+* sideauth will return status 200 if account is created successfully
+* thingaday rest handler will redirect to a "look for your email" page
+
+* email will be html email with GET link to thingaday URL
+* rest handler for thingaday will POST URL secret to sideauth
+* sideauth marks account valid and returns 200
+* thingaday creates session and redirects to landing page
