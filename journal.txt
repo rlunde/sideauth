@@ -403,3 +403,18 @@ First Step: create an account for thingaday
 * rest handler for thingaday will POST URL secret to sideauth
 * sideauth marks account valid and returns 200
 * thingaday creates session and redirects to landing page
+
+==========================================
+Tuesday, March 6, 2018
+==========================================
+
+OK, sample template for account creation.
+
+I just discovered cheetah, which may be worth looking at for other
+template stuff? http://cheetahtemplate.org/
+
+For now, I'll just have regular old HTML, that people can modify
+as they wish.
+
+Here's a good starting point?
+https://www.w3schools.com/howto/howto_css_signup_form.asp
