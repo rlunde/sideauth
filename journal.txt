@@ -418,3 +418,46 @@ as they wish.
 
 Here's a good starting point?
 https://www.w3schools.com/howto/howto_css_signup_form.asp
+
+
+==========================================
+Saturday, March 31, 2018
+==========================================
+
+I think I should spend a little time looking at what else is out
+there. I have the feeling I just missed a lot of things the last
+time I looked.
+
+These things seem to be popular, and have at least an option for open source,
+although I don't know how real that is. Some of these also provide single-sign-on.
+
+https://auth0.com/opensource
+https://www.keycloak.org/
+https://www.gluu.org/
+https://oauth.net/code/
+https://www.unicon.net/opensource/cas
+
+The trouble with all of these things is that they seem to all provide dozens or
+hundreds of "features" without providing anything that would qualify as "help" for
+the average developer or small startup.
+
+Many people (end users) are still skeptical of Oauth2 features. They don't *want*
+to log in to your random silly site with their Facebook or Google (etc.) account.
+They don't trust you, and they don't know what you can do if they say OK.
+
+Most people would prefer to have an account and a password. They don't want to give
+you their email address, but they're usually willing to if you solemnly promise
+not to give it to anyone else or use it for marketing purposes. The main reason to
+have it at all is to be able to recover lost passwords or lost account IDs.
+
+In fact, you can do that without ever storing the email address--just use the hash 
+as the key in the database, and then if you get a "lost my password" API call containing
+the email, hang on to it long enough to send email using it.
+
+What most of us would like is a simple checklist for dealing with account management,
+passwords, and sessions -- with good examples for each step.
+
+Maybe that's the most valuable thing I could do with this project, is just show how
+to use this in a complete sample app, and show step-by-step how to use it for just 
+passwords, or OpenID Connect, or Oauth2, etc.
+
