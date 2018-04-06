@@ -461,3 +461,23 @@ Maybe that's the most valuable thing I could do with this project, is just show 
 to use this in a complete sample app, and show step-by-step how to use it for just 
 passwords, or OpenID Connect, or Oauth2, etc.
 
+
+==========================================
+Thursday, April 5, 2018
+==========================================
+
+Part of that last bit, of showing how to use it in a complete
+sample app, is just the difficultly of finding a complete sample
+app.
+
+It seems like so many open source projects are a library or a module,
+with spiffy looking documentation that really doesn't help much at
+all, and no good examples.
+
+Other things, like Atom (for example) are huge! I just cloned the latest
+Atom repo and ran sloc on it, and it had 113K lines of code.
+
+One thing this has made me realize though is that I should be spending
+more time trying to find "real" open source projects to use as role
+models and examples, and learning what I can from them.
+
