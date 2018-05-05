@@ -481,3 +481,19 @@ One thing this has made me realize though is that I should be spending
 more time trying to find "real" open source projects to use as role
 models and examples, and learning what I can from them.
 
+==========================================
+Friday, May 4, 2018
+==========================================
+
+I need to get back to next steps. Hmm. From what I can see,
+Auth0 has a lot of opensource client integration, but their
+service is not open source.
+
+In contrast, Keycloak appears to actually be open source. So I'll
+start by trying to find/make a complete example app using that.
+If I think it's easy enough, perhaps this project can get
+shut down entirely. Or maybe I can use it behind a simple 
+API proxy interface.
+
+Anyway: next step is download and install keycloak and try making
+a sample app that supports passwords with password recovery.
