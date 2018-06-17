@@ -21,15 +21,22 @@ Notes:
 2) I'll probably discover additional requirements when I implement a user of sideauth
 3) To create an account:
   a) use POST accounts, which succeeds unless the account already exists
-  b) sideauth sends email to user's address: send failure causes failure of POST
+  b) sideauth sends email to user's address: send failure causes failure to change status to verified
   c) email contains a link to click
   d) clicked link updates the account to mark it verified
-4) To reset a password
+4) To reset a password, it's similar to verifying email in the first place
   a) user clicks on a reset link provided by app server
-  b) app server uses PUT /accounts/${base64_name}/reset
-  c) if account exists, mark it unverified and send an email link to web page done by sideauth
-  d) sideauth verifies link code and account code, and gets a new password (repeat if p/w problem)
-  e) once p/w is reset, mark the account verified again and redirect to login page of app server
+  b) app server uses PUT /accounts/${base64_name}/reset with a secret code
+  c) if account exists, mark it unverified
+  d) the app will send an email link to web page in app domain
+  e) the reset page will get a code from the link, let user choose new password, and POST the results
+  f) use the same PUT /accounts/${base64_name}/verify/${code} except with email sent in body
 
 I wish I could think of a simple solution that didn't involve handling APIs / pages from the user
 directly. Maybe those pages should be proxied through the app? I need to think about it some more.
+
+Also need to think about threat model and security issues. For example, how do I stop someone
+from creating millions of unverified accounts? How do I stop someone from using this service to 
+SPAM someone else's email with thousands of "verify your account" emails?
+
+

@@ -7,9 +7,6 @@ quite a while. I'm using it as a learning exercise more than anything else at th
 goal of eventually knowing golang better (in this case). I will remove this disclaimer when
 I think the project has reached MVP (minimum viable project) stage. That won't be for a while.
 
-NOTE: I'm not abandoning this project, but I've decided to spend some time really focusing on
-another project (goodwin), which I will then use to try to help make this project.
-
 ## motivation
 I found myself trying to make several different sample services, that I wanted
 to run myself as default webservices, as well as (hopefully) provide a base for
