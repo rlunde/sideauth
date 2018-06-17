@@ -4,6 +4,8 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+//TODO: move all the Mongo database stuff to its own package
+
 //CreateObjectIDStr - return an ID for use in MongoDB for a Account
 func CreateObjectIDStr() string {
 	var id bson.ObjectId

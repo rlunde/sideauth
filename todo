@@ -1,14 +1,11 @@
-[x] finish going through https://golang.org/doc/code.html
-[x] replace gin with standard net/http and gorilla
+
 [ ] refactor stuff brought in from funtodone into apis from api.txt -- try doing them in this order:
-  [ ] POST /accounts
-  [ ] GET /accounts/${base64_name}/pw/${hash}
+  [ ] POST /accounts -- create an account
+  [ ] GET /accounts/${base64_name}/pw/${hash} -- verify that this account has this password hash
   [ ] GET /accounts/${base64_name} -- check if an account exists
   [ ] PUT /accounts/${base64_name} -- reset a password, update an email
 [ ] write tests for apis
   [ ] /sideauth/v1/status
-
-  
 
 [ ] the caller should hash the password with salt sideauth never sees
 [ ] read up on how OAuth2 works
