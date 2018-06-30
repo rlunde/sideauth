@@ -1,3 +1,0 @@
-#!/bin/bash
-go get ./...
-go build -o sideauth sideauth.go
